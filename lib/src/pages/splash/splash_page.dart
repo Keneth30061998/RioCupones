@@ -5,6 +5,8 @@ import 'package:rio_cupones/src/pages/splash/splash_controller.dart';
 class SplashPage extends StatelessWidget {
   final SplashController con = Get.put(SplashController());
 
+  SplashPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

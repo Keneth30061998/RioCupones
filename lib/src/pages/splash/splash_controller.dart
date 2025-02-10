@@ -29,7 +29,7 @@ class SplashController extends GetxController {
 
   //clase para moverse de pantalla
   void _navigateToLogin() {
-    Get.off(LoginPage());
+    Get.off(() => LoginPage());
   }
 
   @override
