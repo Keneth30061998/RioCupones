@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:rio_cupones/src/constants/colors.dart';
 import 'package:rio_cupones/src/pages/splash/splash_controller.dart';
 
 class SplashPage extends StatelessWidget {
@@ -24,18 +25,18 @@ class SplashPage extends StatelessWidget {
               style: TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
-                color: Color(0xFF3C3F41),
+                color: secondary_color,
               ),
             ),
             SizedBox(
               height: 5,
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 30),
+              padding: const EdgeInsets.symmetric(horizontal: 75),
               child: Obx(() => LinearProgressIndicator(
                     value: con.progress.value / 100,
                     backgroundColor: Colors.grey[300],
-                    color: Colors.blueAccent,
+                    color: primary_color,
                     minHeight: 8,
                   )),
             ),
@@ -48,7 +49,7 @@ class SplashPage extends StatelessWidget {
                   style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.w600,
-                      color: Color(0x623C3F41)),
+                      color: secondary_color),
                 ))
           ],
         ),

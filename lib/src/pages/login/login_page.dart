@@ -1,12 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:rio_cupones/src/constants/colors.dart';
+import 'package:rio_cupones/src/pages/login/login_controller.dart';
 
 class LoginPage extends StatelessWidget {
-  const LoginPage({super.key});
+  LoginController con = Get.put(LoginController());
+
+  LoginPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomNavigationBar: SizedBox(
+        height: 50,
+        child: _textDontHaveAccount(),
+      ),
       body: Stack(
         children: [
           _backgroudCover(context),
@@ -56,6 +64,7 @@ class LoginPage extends StatelessWidget {
       child: SingleChildScrollView(
         child: Column(
           children: [
+            _textWelcome(),
             _textYourInfo(),
             _textFieldEmail(),
             _textFieldPassword(),
@@ -108,7 +117,18 @@ class LoginPage extends StatelessWidget {
     return Text(
       'Ingrese sus credenciales',
       style: TextStyle(
-        fontSize: 21,
+        fontSize: 20,
+        fontWeight: FontWeight.w500,
+        color: secondary_color,
+      ),
+    );
+  }
+
+  Widget _textWelcome() {
+    return Text(
+      'Bienvenido!',
+      style: TextStyle(
+        fontSize: 26,
         fontWeight: FontWeight.bold,
         color: secondary_color,
       ),
@@ -158,9 +178,44 @@ class LoginPage extends StatelessWidget {
       margin: const EdgeInsets.only(bottom: 5),
       child: FloatingActionButton.extended(
         onPressed: () {},
-        label: Text('Login'),
-        icon: Icon(Icons.login),
+        label: Text(
+          'Login',
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        icon: Icon(Icons.login_outlined),
         elevation: 0,
+      ),
+    );
+  }
+
+  //Widget Bottom Text - Registrate
+  Widget _textDontHaveAccount() {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 15),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            '¿No tienes una cuenta?  ',
+            style: TextStyle(
+              color: darkGray,
+              fontSize: 17,
+            ),
+          ),
+          GestureDetector(
+            onTap: () => con.goToUserRegisterPage(),
+            child: Text(
+              'Registrate Aqui',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 17.5,
+                color: secondary_color,
+              ),
+            ),
+          )
+        ],
       ),
     );
   }
