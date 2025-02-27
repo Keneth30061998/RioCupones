@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:rio_cupones/src/constants/app_theme.dart';
+import 'package:rio_cupones/src/pages/admin/home/admin_home_page.dart';
+import 'package:rio_cupones/src/pages/admin/register/business/admin_register_business_page.dart';
 import 'package:rio_cupones/src/pages/splash/splash_page.dart';
 import 'package:rio_cupones/src/pages/user/register/user_register_page.dart';
 
@@ -34,7 +36,11 @@ class _MyAppState extends State<MyApp> {
       initialRoute: '/',
       getPages: [
         GetPage(name: '/', page: () => SplashPage()),
-        GetPage(name: '/user-register', page: ()=>UserRegisterPage())
+        GetPage(name: '/user-register', page: () => UserRegisterPage()),
+        GetPage(name: '/admin-home', page: () => AdminHomePage()),
+        GetPage(
+            name: '/admin-register-business',
+            page: () => AdminRegisterBusinessPage())
       ],
       navigatorKey: Get.key,
     ); //Retornamos un GetMaterialApp -> get (3)

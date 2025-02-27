@@ -177,7 +177,7 @@ class LoginPage extends StatelessWidget {
       width: double.infinity,
       margin: const EdgeInsets.only(bottom: 5),
       child: FloatingActionButton.extended(
-        onPressed: () {},
+        onPressed: () => con.goToAdminHome(),
         label: Text(
           'Login',
           style: TextStyle(

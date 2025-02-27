@@ -1,86 +1,73 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:rio_cupones/src/pages/admin/home/admin_home_controller.dart';
 
-class VendorPage extends StatefulWidget {
-  const VendorPage({super.key});
+import '../../../constants/colors.dart';
 
-  @override
-  State<VendorPage> createState() => _VendorPageState();
-}
+class AdminHomePage extends StatelessWidget {
+  AdminHomeController con = Get.put(AdminHomeController());
 
-class _VendorPageState extends State<VendorPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Vendedores')),
-      body: SingleChildScrollView(
-        scrollDirection: Axis.horizontal,
-        child: DataTable(
-          columns: const [
-            DataColumn(label: Text('ID Vendedor')),
-            DataColumn(label: Text('Nombre')),
-            DataColumn(label: Text('Email')),
-            DataColumn(label: Text('Estado')),
-            DataColumn(label: Text('Fecha Creación')),
-            DataColumn(label: Text('Fecha Caducidad')),
-            DataColumn(label: Text('Acciones')),
-          ],
-          rows: [
-            DataRow(cells: [
-              _buildCell('1'),
-              _buildCell('Juan Pérez'),
-              _buildCell('juan@email.com'),
-              _buildCell('Activo'),
-              _buildCell('2024-01-10'),
-              _buildCell('2025-01-10'),
-              DataCell(Row(
-                children: [
-                  IconButton(
-                    icon: const Icon(Icons.edit, color: Colors.blue),
-                    onPressed: () => _showEditModal(context, 'Juan Pérez'),
-                  ),
-                  IconButton(
-                    icon: const Icon(Icons.delete, color: Colors.red),
-                    onPressed: () {},
-                  ),
-                ],
-              )),
-            ])
+      appBar: AppBar(
+        title: const Text('Admin Home Page'),
+        centerTitle: true,
+      ),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20),
+        child: Column(
+          children: [
+            // Barra de búsqueda mejorada
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 15),
+              margin: const EdgeInsets.symmetric(vertical: 20),
+              decoration: BoxDecoration(
+                color: Colors.grey[200],
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: TextField(
+                keyboardType: TextInputType.name,
+                decoration: InputDecoration(
+                  hintText: 'Buscar...',
+                  prefixIcon: const Icon(Icons.search, color: Colors.grey),
+                  border: InputBorder.none,
+                ),
+              ),
+            ),
+            // Lista mejorada
+            Expanded(
+              child: ListView.separated(
+                itemBuilder: (_, index) {
+                  return ListTile(
+                    leading: CircleAvatar(
+                        backgroundColor: Colors.white60,
+                        child: Image.asset(
+                          'assets/img/logo_cupones.png',
+                        )),
+                    title: Text('Negocio ${index + 1}',
+                        style: const TextStyle(fontWeight: FontWeight.bold)),
+                    subtitle: Text('Descripción del negocio $index'),
+                    trailing:
+                        IconButton(onPressed: () {}, icon: Icon(Icons.delete)),
+                    onTap: () {},
+                  );
+                },
+                separatorBuilder: (_, __) => const Divider(),
+                itemCount: 20,
+              ),
+            ),
           ],
         ),
       ),
-    );
-  }
-
-  DataCell _buildCell(String text) {
-    return DataCell(GestureDetector(
-      onTap: () => _showEditModal(context, text),
-      child: Text(text),
-    ));
-  }
-
-  void _showEditModal(BuildContext context, String name) {
-    showModalBottomSheet(
-      context: context,
-      builder: (context) {
-        return Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text('Editar: $name', style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-              const SizedBox(height: 10),
-              TextFormField(decoration: const InputDecoration(labelText: 'Nombre')),
-              TextFormField(decoration: const InputDecoration(labelText: 'Email')),
-              TextFormField(decoration: const InputDecoration(labelText: 'Estado')),
-              const SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: () {},
-                child: const Text('Guardar Cambios'),
-              ),
-            ],
-          ),
-        );
-      },
+      // FAB mejorado
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () => con.goToAdminRegisterBusiness(),
+        label: const Text('Agregar Negocio'),
+        icon: const Icon(Icons.add),
+        backgroundColor: primary_color,
+        elevation: 6,
+      ),
     );
   }
 }

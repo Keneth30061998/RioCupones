@@ -184,6 +184,7 @@ class UserRegisterPage extends StatelessWidget {
       child: TextField(
         controller: con.passwordController,
         keyboardType: TextInputType.text,
+        obscureText: true,
         decoration: InputDecoration(
           labelText: 'Contraseña',
           hintText: 'Contraseña',
@@ -202,6 +203,7 @@ class UserRegisterPage extends StatelessWidget {
       child: TextField(
         controller: con.confirmPasswordController,
         keyboardType: TextInputType.text,
+        obscureText: true,
         decoration: InputDecoration(
           labelText: 'Confirmar Contraseña',
           hintText: 'Confirmar Contraseña',
